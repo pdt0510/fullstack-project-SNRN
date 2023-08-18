@@ -10,7 +10,7 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port} ------------`);
   await app.listen(port);
 }
 bootstrap();

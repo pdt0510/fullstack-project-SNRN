@@ -1,10 +1,12 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Cat } from './cat.entity';
+import { Cat } from '../../models/catModel';
+import * as utils from '../../utils/constants';
+import { ICatsService } from '../../repositories/ICatsService';
 
 @Injectable()
-export class CatsService {
+export class CatsService implements ICatsService {
   constructor(
-    @Inject('CATS_REPOSITORY')
+    @Inject(utils.repoNames.cats) //xx1
     private catsRepository: typeof Cat,
   ) {}
 
@@ -12,7 +14,7 @@ export class CatsService {
     return await this.catsRepository.findAll<Cat>();
   }
 
-  async createACat(): Promise<Cat> {
+  async createOne(): Promise<Cat> {
     return await this.catsRepository.create<Cat>({
       name: 'test name col',
       age: 333,

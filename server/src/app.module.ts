@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TestApiModule } from './test-api/test-api.module';
-import { CatsModule } from './cats/cats.module';
-import { DatabaseModule } from './database/database.module';
+import { CatsModule } from './modules/cats/cats.module';
+import { SequelizeModule } from './sequelize-connection/sequelize.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TestApiModule,
     CatsModule,
-    DatabaseModule,
+    SequelizeModule,
   ],
   providers: [],
 })

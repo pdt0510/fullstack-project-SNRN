@@ -1,15 +1,15 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Cat } from '../cats/cat.entity';
+import { Cat } from '../models/catModel';
+import * as constVals from '../utils';
 
 export const databaseProviders = [
   {
-    provide: 'SEQUELIZE',
+    provide: constVals.dbVals.sequelize,
     useFactory: async () => {
-      const defaultPort = 3306;
       const sequelize = new Sequelize({
         dialect: 'mysql',
         host: 'localhost',
-        port: defaultPort,
+        port: 3306,
         username: 'root',
         password: null,
         query: { raw: true },
@@ -19,7 +19,7 @@ export const databaseProviders = [
           typeCast: true,
         },
         timezone: '+07:00',
-        database: 'nest', //first of all, creating a db named 'nest' for connecting to mysql via
+        database: constVals.dbVals.dbName,
       });
       sequelize.addModels([Cat]);
       await sequelize.sync();
