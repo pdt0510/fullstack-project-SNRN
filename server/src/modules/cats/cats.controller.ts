@@ -1,12 +1,12 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { CatsService } from './cats.service';
+import { PactumService as PactumService } from './pactum.service';
 import * as utils from '../../utils/constants';
-import { PactumjsOrmService } from './cats.PactumjsOrmService';
 
 @Controller(utils.ctrlNames.cats)
 export class CatsController {
-  constructor(private catServs: PactumjsOrmService) {} //xx2
-  // constructor(private catServs: CatsService) {}
+  // constructor(private catServs: PactumService) {}
+  constructor(private catServs: CatsService) {}
 
   @Get()
   async getAllCats() {

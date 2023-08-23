@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { catsProviders } from '../../repositories/catsProviders';
 import { CatsController } from './cats.controller';
-import { PactumjsOrmService } from './cats.PactumjsOrmService';
+import { PactumService } from './pactum.service';
+import { Cat } from './../../models/catModel';
+import * as utils from '../../utils/index';
+
+const catsProviders = [
+  {
+    provide: utils.repoNames.cats,
+    useValue: Cat,
+  },
+];
 
 @Module({
   controllers: [CatsController],
-  providers: [CatsService, PactumjsOrmService, ...catsProviders], //xx2
+  providers: [CatsService, PactumService, ...catsProviders],
 })
 export class CatsModule {}
